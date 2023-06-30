@@ -1,9 +1,12 @@
+import 'dotenv/config';
+
 import express, {Request, Response} from 'express';
 
 import routeMain from './routes';
 
-const app = express ();
 
+const app = express ();
+const PORT = process.env.PORT
 //**routing: enrutamiento */
 //http://localhost:3000/
 
@@ -24,10 +27,12 @@ app.get( '/home',(req : Request, res: Response ) => {
  
 });
 
-app.listen(3000, () => {
-    console.log('servidor lanzado en el puerto 3000');
-    
-});
+;
 /**Middleware */
 //http://localhost:3000/api/
 app.use ('/api', routeMain )
+
+app.listen(PORT, () => {
+    console.log('servidor en http://localhost:${PORT}');
+    
+});
