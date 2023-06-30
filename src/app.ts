@@ -3,6 +3,7 @@ import 'dotenv/config';
 import express, {Request, Response} from 'express';
 
 import routeMain from './routes';
+import db from "./config/mongo.config";
 
 
 const app = express ();
@@ -32,7 +33,12 @@ app.get( '/home',(req : Request, res: Response ) => {
 //http://localhost:3000/api/
 app.use ('/api', routeMain )
 
+/*db()
+    .then( () => console.log(`MongoDB se conecto correctamente`))
+    .catch( () => console.log(`MongoDB sufre un problema de conexion`));*/
+
+
 app.listen(PORT, () => {
-    console.log('servidor en http://localhost:${PORT}');
+    console.log(`servidor en http://localhost:${PORT}`);
     
 });
