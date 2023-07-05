@@ -1,20 +1,31 @@
 
-import { Request, Response }  from "express";
 
-function getProducts( req: Request, res:Response ){
+import { Request, Response }  from "express";
+import { insertProduct } from "../services/product.service";
+
+async function getProducts( req: Request, res:Response ){
 console.log('Obtiene todos los productos');
+res.send(`Obtiene todos los productos`);
 }
-function getProduct ( req: Request, res:Response ){
+async function getProduct ( req: Request, res:Response ){
 console.log('Obtiene un producto por ID');
+res.send (`Obtiene un producto por ID`);
 }
-function createProduct ( req: Request, res:Response ){
-console.log('crea un producto');
+async function createProduct ( req: Request, res:Response ){
+console.log(req.body);
+
+const data = await insertProduct(req.body);
+
+console.log( data );
+res.json ( data );
 }
-function updateProduct ( req: Request, res:Response ){
+async function updateProduct ( req: Request, res:Response ){
 console.log('Actualiza un producto por ID');
+res.send(`Actualiza un producto por ID`);
 }
-function deleteProduct ( req: Request, res:Response ){
+async function deleteProduct ( req: Request, res:Response ){
 console.log( 'Elimina un producto por ID');
+res.send(`Elimina un producto por ID`)
 }
 export{
     getProducts,
@@ -22,4 +33,4 @@ export{
     createProduct,
     updateProduct,
     deleteProduct
-}
+};

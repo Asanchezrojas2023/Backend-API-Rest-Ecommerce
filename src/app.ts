@@ -12,7 +12,7 @@ const PORT = process.env.PORT
 //http://localhost:3000/
 
 app.get( '/', ( req : Request, res: Response ) => {
- const message = 'Bienvenido a la API de Ecommerce';
+ const message: String ='Bienvenido a la API de Ecommerce';
    
  console.log(message);// mensaje a la terminal
  
@@ -29,15 +29,17 @@ app.get( '/home',(req : Request, res: Response ) => {
 });
 
 ;
+//implementando middlewares a Express
+app.use (express.json());
 /**Middleware */
 //http://localhost:3000/api/
 app.use ('/api', routeMain )
 
-/*db()
+db()
     .then( () => console.log(`MongoDB se conecto correctamente`))
-    .catch( () => console.log(`MongoDB sufre un problema de conexion`));*/
+    .catch( () => console.error (`MongoDB sufre un problema de conexion`));
 
-
+// lanza el servidor web
 app.listen(PORT, () => {
     console.log(`servidor en http://localhost:${PORT}`);
     
