@@ -15,7 +15,6 @@ app.get( '/', ( req : Request, res: Response ) => {
  const message: String ='Bienvenido a la API de Ecommerce';
    
  console.log(message);// mensaje a la terminal
- 
  res.send(`<h1>${message}</h1>`); // mensaje al navegador
 });
 //http://localhost:3000/Home (EndPoint)

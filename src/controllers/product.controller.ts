@@ -1,4 +1,4 @@
-
+//la unica funcion del controlador es gestionar las acciones 
 
 import { Request, Response }  from "express";
 import { insertProduct } from "../services/product.service";
@@ -12,12 +12,22 @@ console.log('Obtiene un producto por ID');
 res.send (`Obtiene un producto por ID`);
 }
 async function createProduct ( req: Request, res:Response ){
-console.log(req.body);
 
-const data = await insertProduct(req.body);
+
+try {
+    const data = await insertProduct(req.body);
 
 console.log( data );
 res.json ( data );
+
+} catch (error) {
+console.log( `error en la insercion del producto` );
+res.json({
+    msg:'ERROR_INSERT_PRODUCT'
+});
+
+}
+
 }
 async function updateProduct ( req: Request, res:Response ){
 console.log('Actualiza un producto por ID');
