@@ -1,14 +1,18 @@
 //la unica funcion del controlador es gestionar las acciones 
 
 import { Request, Response }  from "express";
-import { getAllProducts, insertProduct } from "../services/product.service";
+import { getAllProducts, getProductById, insertProduct } from "../services/product.service";
 
 async function getProducts( req: Request, res:Response ){
     try {
-      const response = await getAllProducts();  
-      console.log();
+      const 
+      response = await getAllProducts(),
+      data = response ? response : 'NOT_FOUND' // pendiente
+      
 
-      res.json (response);
+      console.log(data);
+
+      res.json (data);
       
     } catch (error) {
         console.log(`Error en la extraccion del listado de productos`);
@@ -19,8 +23,23 @@ async function getProducts( req: Request, res:Response ){
 
 }
 async function getProduct ( req: Request, res:Response ){
-console.log('Obtiene un producto por ID');
-res.send (`Obtiene un producto por ID`);
+    
+    const productId = req.params.id;
+    try {
+        
+
+        const response = await getProductById ( productId );
+
+        console.log(res);
+        res.json({ response });
+
+    } catch (error) {
+        console.log(`Error en la extraccion del producto con id : ${productId}`);
+         res.json({
+            msg:'ERRO_GET-PRODUCT_BY_ID'
+         })
+    }
+    
 }
 async function createProduct ( req: Request, res:Response ){
 

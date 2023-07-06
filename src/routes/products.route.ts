@@ -8,7 +8,7 @@ const router = Router ();
 //http://localhost:3000/api/products/
 
 router.get ('/', getProducts );
-router.get('/', getProduct );
+router.get('/:id', getProduct );
 router.post ('/', createProduct );
 router.put ('/', updateProduct );
 router.delete ('/', deleteProduct );
