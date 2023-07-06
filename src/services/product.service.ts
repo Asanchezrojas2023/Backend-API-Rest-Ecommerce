@@ -23,9 +23,18 @@ const  removeProductById = async ( productId: string) => {
     
 }
 
+const updateProductById = async (productId: string, updateProduct: Product) => {
+return await ProductModel.findOneAndUpdate(
+    { _id: productId}, // Id del documento que deseammos actualizar
+    updateProduct,       // el documento poor elk que vamos a actualizar
+    { new: true} // configuracion para el comando Update
+    );
+}
+
 export{
     insertProduct,
     getAllProducts,
     getProductById,
-    removeProductById
+    removeProductById,
+    updateProductById
 }

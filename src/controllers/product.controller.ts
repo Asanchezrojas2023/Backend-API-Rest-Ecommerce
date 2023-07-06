@@ -1,7 +1,7 @@
 //la unica funcion del controlador es gestionar las acciones 
 
 import { Request, Response }  from "express";
-import { getAllProducts, getProductById, insertProduct, removeProductById } from "../services/product.service";
+import { getAllProducts, getProductById, insertProduct, removeProductById, updateProductById } from "../services/product.service";
 
 async function getProducts( req: Request, res:Response ){
     try {
@@ -62,9 +62,18 @@ res.json({
 
 }
 async function updateProduct ( req: Request, res:Response ){
-console.log('Actualiza un producto por ID');
-res.send(`Actualiza un producto por ID`);
-}
+    const {params :{ id }} = req;   // si no se entiende hacerlo de la forma convencional
+     const {body} = req;
+     
+    try {
+        const response = await updateProductById ( id, body );
+        res.json(response)
+    } catch (error) {
+        console.log( `error en la actualizacion del producto con Id` );
+    res.json ({
+    msg:'ERROR_UPDATE_PRODUCT_BY_ID'
+    });
+}}
 async function deleteProduct ( req: Request, res:Response ){
 
     const productId = req.params.id;
@@ -85,6 +94,8 @@ async function deleteProduct ( req: Request, res:Response ){
 }
 export{
     getProducts,
+
+
     getProduct,
     createProduct,
     updateProduct,
