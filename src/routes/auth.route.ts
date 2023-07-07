@@ -6,11 +6,19 @@ import { createProduct, deleteProduct, getProducts, getProduct, updateProduct } 
 
 const router = Router ();
 //http://localhost:3000/api/products/
+router.post ('/register', ( req: Request, res:Response) => {
 
-router.get ('/', getProducts );
-router.get('/:id', getProduct );
-router.post ('/', createProduct );
-router.put ('/:id', updateProduct );
-router.delete ('/:id', deleteProduct );
+
+    console.log('Registra usuario');
+    res.send (' Registra usuario')
+    
+});
+
+router.post('/login', (req: Request, res: Response) => {
+    console.log('login usuario');
+    res.send('login usuario');
+    
+});
+ 
 
 export default router;
