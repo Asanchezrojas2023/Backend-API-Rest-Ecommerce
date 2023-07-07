@@ -1,24 +1,14 @@
 /** Archivo central de enrutamiento*/
 
 import {Router, Request, Response} from "express";
-
-import { createProduct, deleteProduct, getProducts, getProduct, updateProduct } from "../controllers/product.controller";
+import { login, register } from "../controllers/auth.controller";
 
 const router = Router ();
 //http://localhost:3000/api/products/
-router.post ('/register', ( req: Request, res:Response) => {
+router.post ('/register', register);
+//http://localhost:3000/api/api/auth/login
 
-
-    console.log('Registra usuario');
-    res.send (' Registra usuario')
-    
-});
-
-router.post('/login', (req: Request, res: Response) => {
-    console.log('login usuario');
-    res.send('login usuario');
-    
-});
+router.post('/login', login);
  
 
 export default router;
