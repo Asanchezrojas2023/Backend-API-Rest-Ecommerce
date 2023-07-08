@@ -1,14 +1,15 @@
 
 import { Request, Response } from "express";
-import { registerNewUser } from "../services/auth.service";
+import { loginUser, registerNewUser } from "../services/auth.service";
 
 
 
 const register = async ( req: Request, res: Response ) => {
     const user = req.body;
-
+// TODO Encriptar contrasenia
     try {
         const response = await registerNewUser ( user );
+// TODO No enviar la propiedad de contraseñia al cliente
         res.json(response);
 
     } catch (error) {
@@ -20,9 +21,20 @@ const register = async ( req: Request, res: Response ) => {
   
 }
     
-const login = ( req: Request, res: Response ) => {
-    console.log( 'Login usuario' );
-    res.send( 'Login usuario' );
+const login = async ( req: Request, res: Response ) => {
+    const user = req.body;
+    
+    try {
+        const response = await loginUser( user );
+        console.log( response );
+        
+
+    } catch (error) {
+        console.log( `error en el acceso del usuario al sistema` );
+        res.json ({
+        msg:'ERROR_LOGIN_USER'
+        }); 
+    }
 }
 
 export {
