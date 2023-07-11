@@ -13,7 +13,8 @@ const registerNewUser =  async ( newUser: User ) => {
         return 'USER_ALREADY_EXISTS';
     }
 
-    const hashPassword = hash(newUser.password, )
+    const hashPassword = await hash( newUser.password, 9 );
+    newUser.password = hashPassword;
 
     //2. Registra el usuario si no existe
     const response = await AuthModel.create( newUser );
@@ -37,7 +38,12 @@ const loginUser = async (user: Auth) => {
         return'WRONG_PASSWORD'
     }
         
-    return userFound;
+    
+   /* const JWT_SECRET = process.env.JWT_SECRET-KEY || 'otr4-cl4v3-s3cr3t4'
+crear token = sign (
+
+)*/
+
 }
 
 export {
