@@ -26,7 +26,7 @@ if (! payload) {
 const { userId, rol, name } = payload as { userId: string, rol: string, name: string };
 
 console.log( payload );
-
+//TODO: Pasar los valores al response y extraerlos en el controlador
 
 
 next();
