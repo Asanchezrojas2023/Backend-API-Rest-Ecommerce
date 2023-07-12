@@ -31,6 +31,10 @@ const productSchema = new Schema(
         portions:{
             type: Number,
         },
+        userId:{
+            type: Number,
+            required: true
+        },
         deliveryDate:{
             type: Date,
             default: new Date

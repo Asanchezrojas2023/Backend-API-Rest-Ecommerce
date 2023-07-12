@@ -8,5 +8,6 @@
     stock: number;
     porciones:number;
     image: string;
-    deliveryDate: Date;
+    userId: number;
+    deliveryDate: Date
 }
