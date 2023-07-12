@@ -1,9 +1,12 @@
 
 import { Request, Response, NextFunction, json } from "express"
 import { verify } from "jsonwebtoken";
+import { RequestExtends } from "../interfaces/RequestExtends.interface";
 // 1. Procesando la cadena de autorizacion para extraer el token
-const autheticationUser = ( req:Request, res:Response, next:NextFunction ) => {
-const bearerToken = req.headers.authorization || ''; // Bearer 99999999999
+
+const autheticationUser = ( req:RequestExtends, res:Response, next:NextFunction ) => {
+    try {
+        const bearerToken = req.headers.authorization || ''; // Bearer 99999999999
 const arrBearertoken = bearerToken.split( ' ' ); //['Bearer', '99999999999']
 const token = arrBearertoken.pop();                     // 999999999
 
@@ -13,7 +16,7 @@ const payload = verify( `${token}`, `${process.env.JWT_SECRET_KEY}`);
 //3.Verificar si NO hay carga util
 if (! payload) {
     return res.json({
-       msg:'iNVALID_TOKEN'
+       msg:'INVALID_TOKEN'
     });
 }
 //{
@@ -24,12 +27,21 @@ if (! payload) {
 //}
 
 const { userId, rol, name } = payload as { userId: string, rol: string, name: string };
+console.log( userId, rol, name );
+// Agregamos los valores del token al objeto Request de Express usando una nueva interface (Herencia)
+req.authUser = { userId, rol, name }
 
-console.log( payload );
-//TODO: Pasar los valores al response y extraerlos en el controlador
+
 
 
 next();
+        
+    } catch (error) {
+       res.json({
+        msg: 'INVALID_AUTENTICATION'
+       });
+    }
+
 }
 
 export{
